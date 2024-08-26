@@ -51,4 +51,8 @@ public class Package {
   public void decrementTTL() {
     this.TTL = this.TTL - 1;
   }
+
+  public Package duplicate() {
+    return new Package(this.sender, this.receiver, this.message, this.TTL);
+  }
 }
