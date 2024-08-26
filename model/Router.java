@@ -1,21 +1,29 @@
 package model;
 
 import java.util.ArrayList;
+import service.IController;
 
 public class Router {
   private String ip;
-  private ArrayList<Router> connections;
+  private ArrayList<Connection> connections;
+  private IController controller;
 
   public Router(String ip) {
     this.ip = ip;
-    this.connections = new ArrayList<Router>();
+    this.connections = new ArrayList<Connection>();
+  }
+
+  public Router(String ip, IController controller) {
+    this.ip = ip;
+    this.connections = new ArrayList<Connection>();
+    this.controller = controller;
   }
 
   public String getIp() {
     return ip;
   }
 
-  public ArrayList<Router> getConnections() {
+  public ArrayList<Connection> getConnections() {
     return connections;
   }
 
@@ -23,16 +31,25 @@ public class Router {
     this.ip = ip;
   }
 
-  public void setConnections(ArrayList<Router> connections) {
+  public void setConnections(ArrayList<Connection> connections) {
     this.connections = connections;
   }
 
-  public void addConnection(Router router) {
-    this.connections.add(router);
+  public void addConnection(Router router, Integer cost) {
+    Connection connection = new Connection(this, router, cost);
+    this.connections.add(connection);
   }
 
-  public void removeConnectino(Router router) {
-    this.connections.remove(router);
+  public void removeConnection(Connection connection) {
+    this.connections.remove(connection);
+  }
+
+  public IController getController() {
+    return controller;
+  }
+
+  public void setController(IController controller) {
+    this.controller = controller;
   }
 
   @Override
