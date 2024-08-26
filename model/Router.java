@@ -34,4 +34,22 @@ public class Router {
   public void removeConnectino(Router router) {
     this.connections.remove(router);
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null || getClass() != obj.getClass()) {
+      return false;
+    }
+
+    Router router = (Router) obj;
+
+    return this.ip.equals(router.getIp());
+  }
+
+  @Override
+  public String toString() {
+    return "Router{ip='" + this.ip + "'" + " connections=" + this.connections.toString() + "}";
+  }
 }
