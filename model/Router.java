@@ -35,8 +35,7 @@ public class Router {
     this.connections = connections;
   }
 
-  public void addConnection(Router router, Integer cost) {
-    Connection connection = new Connection(this, router, cost);
+  public void addConnection(Connection connection) {
     this.connections.add(connection);
   }
 
