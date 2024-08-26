@@ -4,14 +4,16 @@ public class Package {
   private String sender;
   private String receiver;
   private String message;
+  private Integer TTL;
 
   public Package() {
   }
 
-  public Package(String sender, String receiver, String message) {
+  public Package(String sender, String receiver, String message, Integer TTL) {
     this.sender = sender;
     this.receiver = receiver;
     this.message = message;
+    this.TTL = TTL;
   }
 
   public String getMessage() {
@@ -36,5 +38,21 @@ public class Package {
 
   public void setSender(String sender) {
     this.sender = sender;
+  }
+
+  public Integer getTTL() {
+    return TTL;
+  }
+
+  public void setTTL(Integer tTL) {
+    TTL = tTL;
+  }
+
+  public void decrementTTL() {
+    this.TTL = this.TTL - 1;
+  }
+
+  public Package duplicate() {
+    return new Package(this.sender, this.receiver, this.message, this.TTL);
   }
 }
