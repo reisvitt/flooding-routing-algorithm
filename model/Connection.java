@@ -1,33 +1,33 @@
 package model;
 
 public class Connection {
-  private Router from;
-  private Router to;
+  private Router con1;
+  private Router con2;
   private Integer cost;
 
   public Connection() {
   }
 
-  public Connection(Router from, Router to, Integer cost) {
-    this.from = from;
-    this.to = to;
+  public Connection(Router con1, Router con2, Integer cost) {
+    this.con1 = con1;
+    this.con2 = con2;
     this.cost = cost;
   }
 
-  public Router getFrom() {
-    return from;
+  public Router getCon1() {
+    return con1;
   }
 
-  public void setFrom(Router from) {
-    this.from = from;
+  public void setCon1(Router con1) {
+    this.con1 = con1;
   }
 
-  public Router getTo() {
-    return to;
+  public Router getCon2() {
+    return con2;
   }
 
-  public void setTo(Router to) {
-    this.to = to;
+  public void setCon2(Router con2) {
+    this.con2 = con2;
   }
 
   public Integer getCost() {
@@ -40,6 +40,6 @@ public class Connection {
 
   @Override
   public String toString() {
-    return "Connection{from='" + this.from.getIp() + "'" + " to=" + this.to.getIp() + " cost=" + this.cost + "}";
+    return "Connection{con1=" + this.con1.getIp() + " con2=" + this.con2.getIp() + " cost=" + this.cost + "}";
   }
 }
