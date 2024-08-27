@@ -1,10 +1,13 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Package {
   private String sender;
   private String receiver;
   private String message;
   private Integer TTL;
+  private ArrayList<String> routersHistory;
 
   public Package() {
   }
@@ -14,6 +17,7 @@ public class Package {
     this.receiver = receiver;
     this.message = message;
     this.TTL = TTL;
+    routersHistory = new ArrayList<String>();
   }
 
   public String getMessage() {
@@ -52,7 +56,21 @@ public class Package {
     this.TTL = this.TTL - 1;
   }
 
+  public ArrayList<String> getRoutersHistory() {
+    return routersHistory;
+  }
+
+  public void setRoutersHistory(ArrayList<String> routersHistory) {
+    this.routersHistory = routersHistory;
+  }
+
+  public void addRouterToHistory(String router) {
+    this.routersHistory.add(router);
+  }
+
   public Package duplicate() {
-    return new Package(this.sender, this.receiver, this.message, this.TTL);
+    Package newPackage = new Package(this.sender, this.receiver, this.message, this.TTL);
+    newPackage.setRoutersHistory(new ArrayList<String>(this.routersHistory));
+    return newPackage;
   }
 }
