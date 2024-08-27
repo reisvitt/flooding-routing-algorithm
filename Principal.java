@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import model.Connection;
 import model.Package;
 import model.Router;
-import service.Controller3;
+import service.Controller4;
 import service.IController;
 import utils.ReadConfigFile;
 
@@ -18,7 +18,7 @@ public class Principal {
     Integer size = Integer.parseInt(firstLine);
 
     ArrayList<Router> routers = new ArrayList<Router>(size);
-    IController controller = new Controller3();
+    IController controller = new Controller4();
 
     configs.subList(1, configs.size()).forEach(config -> {
       String[] ipAndRouter = config.split(";");
