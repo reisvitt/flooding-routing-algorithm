@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 import model.Connection;
-import model.Package;
+import model.Packet;
 import model.Router;
 import service.Controller4;
 import service.IController;
@@ -60,8 +60,8 @@ public class Principal {
     String message = "Hello World";
     Integer TTL = 6;
 
-    Package packge = new Package("A", "D", message, TTL);
+    Packet packet = new Packet("A", "D", message, TTL);
 
-    routers.get(0).getController().send(null, routers.get(0), packge);
+    routers.get(0).getController().send(null, routers.get(0), packet);
   }
 }

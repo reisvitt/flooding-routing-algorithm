@@ -1,7 +1,7 @@
 package service;
 
 import model.Connection;
-import model.Package;
+import model.Packet;
 import model.Router;
 
 // all interfaces
@@ -10,10 +10,10 @@ public class Controller1 implements IController {
   }
 
   @Override
-  public void send(Router from, Router router, Package packge) {
+  public void send(Router from, Router router, Packet packet) {
     new Thread(() -> {
-      if (router.getIp().equals(packge.getReceiver())) {
-        System.out.println("CHEGOU AO DESTINO: " + packge.getMessage());
+      if (router.getIp().equals(packet.getReceiver())) {
+        System.out.println("CHEGOU AO DESTINO: " + packet.getMessage());
         return;
       }
 
@@ -28,7 +28,7 @@ public class Controller1 implements IController {
         System.out.println(
             "ROUTER: " + router.getIp() + "CONNECTIONS: " + router.getConnections() + " ENVIANDO PARA: " + to.getIp());
 
-        to.getController().send(router, to, packge);
+        to.getController().send(router, to, packet);
       }
     }).start();
   }

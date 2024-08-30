@@ -1,7 +1,7 @@
 package service;
 
 import model.Connection;
-import model.Package;
+import model.Packet;
 import model.Router;
 
 // all interfaces
@@ -10,26 +10,26 @@ public class Controller4 implements IController {
   }
 
   @Override
-  public void send(Router from, Router router, Package packge) {
+  public void send(Router from, Router router, Packet packet) {
     new Thread(() -> {
       if (from != null) {
-        if (packge.getTTL() == 1) {
-          System.out.println("Reach TTL on Router: " + router.getIp() + " History: " + packge.getRoutersHistory());
+        if (packet.getTTL() == 1) {
+          System.out.println("Reach TTL on Router: " + router.getIp() + " History: " + packet.getRoutersHistory());
           return;
         }
-        packge.decrementTTL();
+        packet.decrementTTL();
       }
 
-      if (packge.getRoutersHistory().contains(router.getIp())) {
+      if (packet.getRoutersHistory().contains(router.getIp())) {
         return;
       }
 
-      packge.addRouterToHistory(router.getIp());
+      packet.addRouterToHistory(router.getIp());
 
-      if (router.getIp().equals(packge.getReceiver())) {
+      if (router.getIp().equals(packet.getReceiver())) {
         System.out.println(
-            "CHEGOU AO DESTINO: " + packge.getMessage() + " FROM: " + from.getIp() + " TTL: " + packge.getTTL()
-                + " History: " + packge.getRoutersHistory());
+            "CHEGOU AO DESTINO: " + packet.getMessage() + " FROM: " + from.getIp() + " TTL: " + packet.getTTL()
+                + " History: " + packet.getRoutersHistory());
         return;
       }
 
@@ -48,7 +48,7 @@ public class Controller4 implements IController {
         System.out.println(
             "ROUTER: " + router.getIp() + " ENVIANDO PARA: " + to.getIp());
 
-        to.getController().send(router, to, packge.duplicate());
+        to.getController().send(router, to, packet.duplicate());
       }
     }).start();
   }
