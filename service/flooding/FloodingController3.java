@@ -1,28 +1,28 @@
-package service;
+package service.flooding;
 
 import model.Connection;
-import model.Package;
+import model.Packet;
 import model.Router;
 
 // all interfaces
-public class Controller3 implements IController {
-  public Controller3() {
+public class FloodingController3 implements FloodingAlgorithm {
+  public FloodingController3() {
   }
 
   @Override
-  public void send(Router from, Router router, Package packge) {
+  public void send(Router from, Router router, Packet packet) {
     new Thread(() -> {
       if (from != null) {
-        if (packge.getTTL() == 0) {
+        if (packet.getTTL() == 0) {
           System.out.println("Reach TTL on Router: " + router.getIp() + " From Router: " + from.getIp());
           return;
         }
-        packge.decrementTTL();
+        packet.decrementTTL();
       }
 
-      if (router.getIp().equals(packge.getReceiver())) {
+      if (router.getIp().equals(packet.getReceiver())) {
         System.out.println(
-            "CHEGOU AO DESTINO: " + packge.getMessage() + " FROM: " + from.getIp() + " TTL: " + packge.getTTL());
+            "CHEGOU AO DESTINO: " + packet.getMessage() + " FROM: " + from.getIp() + " TTL: " + packet.getTTL());
         return;
       }
 
@@ -41,7 +41,7 @@ public class Controller3 implements IController {
         System.out.println(
             "ROUTER: " + router.getIp() + " CONNECTIONS: " + router.getConnections() + " ENVIANDO PARA: " + to.getIp());
 
-        to.getController().send(router, to, packge.duplicate());
+        to.getController().send(router, to, packet.duplicate());
       }
     }).start();
   }

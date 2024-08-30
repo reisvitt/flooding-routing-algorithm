@@ -1,15 +1,15 @@
 import java.util.ArrayList;
 
 import model.Connection;
-import model.Package;
+import model.Packet;
 import model.Router;
-import service.Controller4;
-import service.IController;
-import utils.ReadConfigFile;
+import service.flooding.FloodingController4;
+import service.config.ConfigReader;
+import service.flooding.FloodingAlgorithm;
 
 public class Principal {
   public static void main(String[] args) {
-    ReadConfigFile reader = new ReadConfigFile("backbone.txt");
+    ConfigReader reader = new ConfigReader("backbone.txt");
     ArrayList<String> configs = reader.read();
 
     System.out.println("configs: " + configs.toString());
@@ -18,7 +18,7 @@ public class Principal {
     Integer size = Integer.parseInt(firstLine);
 
     ArrayList<Router> routers = new ArrayList<Router>(size);
-    IController controller = new Controller4();
+    FloodingAlgorithm controller = new FloodingController4();
 
     configs.subList(1, configs.size()).forEach(config -> {
       String[] ipAndRouter = config.split(";");
@@ -60,8 +60,8 @@ public class Principal {
     String message = "Hello World";
     Integer TTL = 6;
 
-    Package packge = new Package("A", "D", message, TTL);
+    Packet packet = new Packet("A", "D", message, TTL);
 
-    routers.get(0).getController().send(null, routers.get(0), packge);
+    routers.get(0).getController().send(null, routers.get(0), packet);
   }
 }

@@ -2,17 +2,17 @@ package model;
 
 import java.util.ArrayList;
 
-public class Package {
+public class Packet {
   private String sender;
   private String receiver;
   private String message;
   private Integer TTL;
   private ArrayList<String> routersHistory;
 
-  public Package() {
+  public Packet() {
   }
 
-  public Package(String sender, String receiver, String message, Integer TTL) {
+  public Packet(String sender, String receiver, String message, Integer TTL) {
     this.sender = sender;
     this.receiver = receiver;
     this.message = message;
@@ -68,8 +68,8 @@ public class Package {
     this.routersHistory.add(router);
   }
 
-  public Package duplicate() {
-    Package newPackage = new Package(this.sender, this.receiver, this.message, this.TTL);
+  public Packet duplicate() {
+    Packet newPackage = new Packet(this.sender, this.receiver, this.message, this.TTL);
     newPackage.setRoutersHistory(new ArrayList<String>(this.routersHistory));
     return newPackage;
   }

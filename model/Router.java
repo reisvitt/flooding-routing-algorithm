@@ -1,19 +1,20 @@
 package model;
 
 import java.util.ArrayList;
-import service.IController;
+
+import service.flooding.FloodingAlgorithm;
 
 public class Router {
   private String ip;
   private ArrayList<Connection> connections;
-  private IController controller;
+  private FloodingAlgorithm controller;
 
   public Router(String ip) {
     this.ip = ip;
     this.connections = new ArrayList<Connection>();
   }
 
-  public Router(String ip, IController controller) {
+  public Router(String ip, FloodingAlgorithm controller) {
     this.ip = ip;
     this.connections = new ArrayList<Connection>();
     this.controller = controller;
@@ -43,11 +44,11 @@ public class Router {
     this.connections.remove(connection);
   }
 
-  public IController getController() {
+  public FloodingAlgorithm getController() {
     return controller;
   }
 
-  public void setController(IController controller) {
+  public void setController(FloodingAlgorithm controller) {
     this.controller = controller;
   }
 
