@@ -1,19 +1,28 @@
-package service;
+package service.flooding;
 
 import model.Connection;
 import model.Packet;
 import model.Router;
 
 // all interfaces
-public class Controller2 implements IController {
-  public Controller2() {
+public class FloodingController3 implements FloodingAlgorithm {
+  public FloodingController3() {
   }
 
   @Override
   public void send(Router from, Router router, Packet packet) {
     new Thread(() -> {
+      if (from != null) {
+        if (packet.getTTL() == 0) {
+          System.out.println("Reach TTL on Router: " + router.getIp() + " From Router: " + from.getIp());
+          return;
+        }
+        packet.decrementTTL();
+      }
+
       if (router.getIp().equals(packet.getReceiver())) {
-        System.out.println("CHEGOU AO DESTINO: " + packet.getMessage());
+        System.out.println(
+            "CHEGOU AO DESTINO: " + packet.getMessage() + " FROM: " + from.getIp() + " TTL: " + packet.getTTL());
         return;
       }
 
@@ -32,7 +41,7 @@ public class Controller2 implements IController {
         System.out.println(
             "ROUTER: " + router.getIp() + " CONNECTIONS: " + router.getConnections() + " ENVIANDO PARA: " + to.getIp());
 
-        to.getController().send(router, to, packet);
+        to.getController().send(router, to, packet.duplicate());
       }
     }).start();
   }

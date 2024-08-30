@@ -1,28 +1,35 @@
-package service;
+package service.flooding;
 
 import model.Connection;
 import model.Packet;
 import model.Router;
 
 // all interfaces
-public class Controller3 implements IController {
-  public Controller3() {
+public class FloodingController4 implements FloodingAlgorithm {
+  public FloodingController4() {
   }
 
   @Override
   public void send(Router from, Router router, Packet packet) {
     new Thread(() -> {
       if (from != null) {
-        if (packet.getTTL() == 0) {
-          System.out.println("Reach TTL on Router: " + router.getIp() + " From Router: " + from.getIp());
+        if (packet.getTTL() == 1) {
+          System.out.println("Reach TTL on Router: " + router.getIp() + " History: " + packet.getRoutersHistory());
           return;
         }
         packet.decrementTTL();
       }
 
+      if (packet.getRoutersHistory().contains(router.getIp())) {
+        return;
+      }
+
+      packet.addRouterToHistory(router.getIp());
+
       if (router.getIp().equals(packet.getReceiver())) {
         System.out.println(
-            "CHEGOU AO DESTINO: " + packet.getMessage() + " FROM: " + from.getIp() + " TTL: " + packet.getTTL());
+            "CHEGOU AO DESTINO: " + packet.getMessage() + " FROM: " + from.getIp() + " TTL: " + packet.getTTL()
+                + " History: " + packet.getRoutersHistory());
         return;
       }
 
@@ -39,7 +46,7 @@ public class Controller3 implements IController {
         }
 
         System.out.println(
-            "ROUTER: " + router.getIp() + " CONNECTIONS: " + router.getConnections() + " ENVIANDO PARA: " + to.getIp());
+            "ROUTER: " + router.getIp() + " ENVIANDO PARA: " + to.getIp());
 
         to.getController().send(router, to, packet.duplicate());
       }

@@ -3,13 +3,13 @@ import java.util.ArrayList;
 import model.Connection;
 import model.Packet;
 import model.Router;
-import service.Controller4;
-import service.IController;
-import utils.ReadConfigFile;
+import service.flooding.FloodingController4;
+import service.config.ConfigReader;
+import service.flooding.FloodingAlgorithm;
 
 public class Principal {
   public static void main(String[] args) {
-    ReadConfigFile reader = new ReadConfigFile("backbone.txt");
+    ConfigReader reader = new ConfigReader("backbone.txt");
     ArrayList<String> configs = reader.read();
 
     System.out.println("configs: " + configs.toString());
@@ -18,7 +18,7 @@ public class Principal {
     Integer size = Integer.parseInt(firstLine);
 
     ArrayList<Router> routers = new ArrayList<Router>(size);
-    IController controller = new Controller4();
+    FloodingAlgorithm controller = new FloodingController4();
 
     configs.subList(1, configs.size()).forEach(config -> {
       String[] ipAndRouter = config.split(";");

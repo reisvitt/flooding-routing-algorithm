@@ -1,14 +1,14 @@
-package utils;
+package service.config;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ReadConfigFile {
+public class ConfigReader {
   private String pathname;
 
-  public ReadConfigFile(String pathname) {
+  public ConfigReader(String pathname) {
     this.pathname = pathname;
   }
 

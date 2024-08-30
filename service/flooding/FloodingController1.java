@@ -1,12 +1,12 @@
-package service;
+package service.flooding;
 
 import model.Connection;
 import model.Packet;
 import model.Router;
 
 // all interfaces
-public class Controller1 implements IController {
-  public Controller1() {
+public class FloodingController1 implements FloodingAlgorithm {
+  public FloodingController1() {
   }
 
   @Override
