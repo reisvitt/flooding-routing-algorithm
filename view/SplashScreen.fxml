@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="450.0" style="-fx-border-radius: 50;" styleClass="root" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SplashController">
+   <center>
+      <VBox fx:id="mainBox" alignment="CENTER" prefHeight="406.0" prefWidth="290.0" style="-fx-border-radius: 50; -fx-background-color: #FFF;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView pickOnBounds="true" preserveRatio="true" style="-fx-fit-height: 720;">
+               <image>
+                  <Image url="@images/background.png" />
+               </image>
+            </ImageView>
+         </children></VBox>
+   </center>
+</BorderPane>
