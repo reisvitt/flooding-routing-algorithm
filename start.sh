@@ -2,6 +2,9 @@
 
 find ./ -type f -name "*.class" -exec rm -f {} +
 
-javac Principal.java
+find ./ -name "*.java" > sources.txt
+javac @sources.txt
 
-java Principal;find ./ -type f -name "*.class" -exec rm -f {} +
+rm sources.txt
+
+java Principal || find ./ -type f -name "*.class" -exec rm -f {} +
