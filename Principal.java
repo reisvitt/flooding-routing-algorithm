@@ -1,3 +1,4 @@
+import controller.SplashController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -6,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Principal extends Application {
+  SplashController splashController = new SplashController();
+
   @Override
   public void start(Stage stage) throws Exception {
 
@@ -13,6 +16,7 @@ public class Principal extends Application {
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.setTitle("Algoritmo de inundação");
+    stage.setResizable(false);
     stage.setOnCloseRequest(t -> {
       Platform.exit();
       System.exit(0);
