@@ -20,8 +20,8 @@ public class Principal extends Application {
     double screenWidth = Screen.getPrimary().getBounds().getWidth();
     double screenHeight = Screen.getPrimary().getBounds().getHeight();
 
-    double windowWidth = screenWidth * 0.8;
-    double windowHeight = screenHeight * 0.7;
+    double windowWidth = screenWidth * 1;
+    double windowHeight = screenHeight * 1;
 
     Scene scene = new Scene(root, windowWidth, windowHeight);
 

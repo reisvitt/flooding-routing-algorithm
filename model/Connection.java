@@ -4,6 +4,7 @@ public class Connection {
   private Router con1;
   private Router con2;
   private Integer cost;
+  private boolean rendered = false;
 
   public Connection() {
   }
@@ -36,6 +37,14 @@ public class Connection {
 
   public void setCost(Integer cost) {
     this.cost = cost;
+  }
+
+  public boolean isRendered() {
+    return rendered;
+  }
+
+  public void setRendered(boolean rendered) {
+    this.rendered = rendered;
   }
 
   @Override

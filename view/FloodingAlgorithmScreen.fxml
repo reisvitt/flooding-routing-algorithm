@@ -52,7 +52,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ComboBox prefHeight="26.0" prefWidth="272.0" visibleRowCount="5" />
+                        <ComboBox fx:id="listAlgorithms" onAction="#stop" prefHeight="26.0" prefWidth="272.0" visibleRowCount="5" />
                      </children>
                   </VBox>
                   <VBox layoutX="10.0" layoutY="106.0" styleClass="field">
@@ -62,7 +62,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField>
+                        <TextField fx:id="ttlInput" accessibleText="Valor do TTL" promptText="Digite o valor do TTL">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -76,7 +76,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ComboBox prefHeight="26.0" prefWidth="272.0" visibleRowCount="5" />
+                        <ComboBox fx:id="listSenders" prefHeight="26.0" prefWidth="272.0" visibleRowCount="5" />
                      </children>
                   </VBox>
                   <VBox layoutX="10.0" layoutY="272.0" styleClass="field">
@@ -86,7 +86,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ComboBox prefHeight="26.0" prefWidth="272.0" visibleRowCount="5" />
+                        <ComboBox fx:id="listReceivers" prefHeight="26.0" prefWidth="272.0" visibleRowCount="5" />
                      </children>
                   </VBox>
                   <VBox layoutX="10.0" layoutY="10.0" styleClass="field">
@@ -96,11 +96,51 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Slider />
+                        <Slider fx:id="velocity" max="10.0" value="5.0" />
                      </children>
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="433.0">
+                     <children>
+                        <StackPane>
+                           <children>
+                              <Button fx:id="startButton" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#start" style="-fx-background-color: transparent;" styleClass="action" textAlignment="CENTER" StackPane.alignment="CENTER">
+                                 <graphic>
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/init-button.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="509.0">
+                     <children>
+                        <StackPane>
+                           <children>
+                              <Button fx:id="stopButton" alignment="CENTER" cancelButton="true" contentDisplay="CENTER" disable="true" graphicTextGap="0.0" mnemonicParsing="false" onAction="#stop" opacity="0.45" style="-fx-background-color: transparent;" styleClass="action" textAlignment="CENTER" StackPane.alignment="CENTER">
+                                 <graphic>
+                                    <ImageView disable="true" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/stop-button.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                        </StackPane>
+                     </children>
                   </VBox>
                   <HBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
                      <children>
@@ -149,7 +189,7 @@
                         <Insets bottom="15.0" top="15.0" />
                      </VBox.margin>
                   </Text>
-                  <Pane fx:id="network" VBox.vgrow="ALWAYS" />
+                  <Pane fx:id="network" styleClass="network" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
          </children>
