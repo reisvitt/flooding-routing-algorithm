@@ -12,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -34,7 +36,7 @@ public class FloodingAlgorithmController implements Initializable {
   private Pane network;
 
   @FXML
-  private TextField ttlInput;
+  private Spinner<Integer> ttlInput;
 
   @FXML
   private ComboBox<String> listSenders, listReceivers;
@@ -119,6 +121,7 @@ public class FloodingAlgorithmController implements Initializable {
 
     this.network.getChildren().add(line);
     line.toBack();
+    connection.setLine(line);
   }
 
   @FXML
@@ -140,7 +143,7 @@ public class FloodingAlgorithmController implements Initializable {
     });
 
     String message = "Hello, World!";
-    Integer TTL = Integer.parseInt(this.ttlInput.getText());
+    Integer TTL = Integer.parseInt(this.ttlInput.getValue().toString());
 
     String from = this.listSenders.getValue();
     String to = this.listReceivers.getValue();
@@ -182,7 +185,7 @@ public class FloodingAlgorithmController implements Initializable {
     double width = network.getWidth();
 
     messageCount.setY(0);
-    messageCount.setX(width - 120);
+    messageCount.setX(width - 160);
 
     this.network.getChildren().add(messageCount);
   }
@@ -251,18 +254,11 @@ public class FloodingAlgorithmController implements Initializable {
 
     listReceivers.setValue(this.routers.get(this.routers.size() - 1).getIp());
 
-    this.ttlInput.setText("5");
+    SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10, 0);
+    this.ttlInput.setValueFactory(valueFactory);
+    this.ttlInput.getValueFactory().setValue(5);
 
     this.startAlgorithms();
-
-    this.ttlInput.textProperty().addListener(new ChangeListener<String>() {
-      @Override
-      public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-        if (!newValue.matches("\\d*")) { // Permite apenas dígitos
-          ttlInput.setText(oldValue);
-        }
-      }
-    });
 
     this.store.getRunningProperty().addListener((observable, oldValue, newValue) -> {
       this.stopButton.setDisable(!newValue);

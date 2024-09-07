@@ -4,9 +4,13 @@ import java.util.ArrayList;
 
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import service.flooding.FloodingAlgorithm;
+import utils.ColorUtil;
 
 public class Router {
   private String ip;
@@ -64,11 +68,64 @@ public class Router {
   }
 
   public void showSuccess(Router from, Packet packet) {
-    // exibir mensagem de sucesso que chegou o pacote corretamente.
+    ImageView image = new ImageView();
+    Image im = new Image("./view/images/success.png");
+    image.setImage(im);
+
+    image.setFitWidth(40);
+    image.setFitHeight(40);
+
+    image.setLayoutY(this.getStack().getLayoutX());
+    image.setLayoutY(this.getStack().getLayoutY());
+
+    Platform.runLater(() -> {
+      this.getStack().getChildren().add(image);
+      Color color = ColorUtil.generateRandomColor();
+      packet.getLineHistory().forEach(line -> {
+        line.setStroke(color);
+      });
+    });
+
+    new Thread(() -> {
+      try {
+        Thread.sleep(2000);
+        Platform.runLater(() -> {
+          stack.getChildren().remove(image);
+          packet.getLineHistory().forEach(line -> {
+            line.setStroke(Color.web("#8fd0d3"));
+          });
+        });
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }).start();
   }
 
   public void showError(Router from, Packet packet) {
-    // exibir mensagem de erro -> venceu ttl ou ja passou
+    ImageView image = new ImageView();
+    Image im = new Image("./view/images/fire.gif");
+    image.setImage(im);
+
+    image.setFitWidth(20);
+    image.setFitHeight(20);
+
+    image.setLayoutY(this.getStack().getLayoutX() + 30);
+    image.setLayoutY(this.getStack().getLayoutY() - 20);
+
+    Platform.runLater(() -> {
+      this.getStack().getChildren().add(image);
+    });
+
+    new Thread(() -> {
+      try {
+        Thread.sleep(1000);
+        Platform.runLater(() -> {
+          stack.getChildren().remove(image);
+        });
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }).start();
   }
 
   public void send(Router from, Packet packet) {
@@ -82,6 +139,9 @@ public class Router {
 
     new Thread(() -> {
       if (this.getIp().equals(packet.getReceiver())) {
+        this.store.setArrived(true);
+        this.showSuccess(from, packet);
+
         String fromIp;
         if (from == null) {
           fromIp = this.ip;
@@ -102,7 +162,9 @@ public class Router {
     this.store.increment();
 
     Platform.runLater(() -> {
-      this.store.incrementMessageCounter();
+      if (!this.store.getArrived()) {
+        this.store.incrementMessageCounter();
+      }
       this.getNetwork().getChildren().add(packet.getImage());
 
       TranslateTransition transition = packet.startTransition(this, to);

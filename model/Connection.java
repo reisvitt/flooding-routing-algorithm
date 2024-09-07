@@ -1,10 +1,13 @@
 package model;
 
+import javafx.scene.shape.Line;
+
 public class Connection {
   private Router con1;
   private Router con2;
   private Integer cost;
   private boolean rendered = false;
+  private Line line;
 
   public Connection() {
   }
@@ -45,6 +48,14 @@ public class Connection {
 
   public void setRendered(boolean rendered) {
     this.rendered = rendered;
+  }
+
+  public Line getLine() {
+    return line;
+  }
+
+  public void setLine(Line line) {
+    this.line = line;
   }
 
   @Override

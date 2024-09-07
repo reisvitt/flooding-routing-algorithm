@@ -14,12 +14,14 @@ public class FloodingController4 implements FloodingAlgorithm {
     if (from != null) {
       if (packet.getTTL() == 1) {
         System.out.println("Reach TTL on Router: " + router.getIp() + " History: " + packet.getRoutersHistory());
+        router.showError(from, packet);
         return;
       }
       packet.decrementTTL();
     }
 
     if (packet.getRoutersHistory().contains(router.getIp())) {
+      router.showError(from, packet);
       return;
     }
 
@@ -41,6 +43,7 @@ public class FloodingController4 implements FloodingAlgorithm {
           "ROUTER: " + router.getIp() + " ENVIANDO PARA: " + to.getIp());
 
       Packet newPacket = packet.duplicate();
+      newPacket.addLineHistory(connection.getLine());
       router.flush(to, newPacket);
     }
   }

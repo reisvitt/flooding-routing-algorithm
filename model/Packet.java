@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javafx.animation.TranslateTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
 public class Packet {
@@ -13,6 +14,7 @@ public class Packet {
   private String message;
   private Integer TTL;
   private ArrayList<String> routersHistory;
+  private ArrayList<Line> lineHistory;
   private ImageView image;
 
   public Packet() {
@@ -25,6 +27,7 @@ public class Packet {
     this.message = message;
     this.TTL = TTL;
     routersHistory = new ArrayList<String>();
+    lineHistory = new ArrayList<Line>();
 
     this.config();
   }
@@ -78,6 +81,18 @@ public class Packet {
     return routersHistory;
   }
 
+  public ArrayList<Line> getLineHistory() {
+    return this.lineHistory;
+  }
+
+  public void addLineHistory(Line line) {
+    this.lineHistory.add(line);
+  }
+
+  public void setLineHistory(ArrayList<Line> linesHistory) {
+    this.lineHistory = linesHistory;
+  }
+
   public void setRoutersHistory(ArrayList<String> routersHistory) {
     this.routersHistory = routersHistory;
   }
@@ -93,6 +108,7 @@ public class Packet {
   public Packet duplicate() {
     Packet newPackage = new Packet(this.sender, this.receiver, this.message, this.TTL);
     newPackage.setRoutersHistory(new ArrayList<String>(this.routersHistory));
+    newPackage.setLineHistory(new ArrayList<Line>(this.lineHistory));
     return newPackage;
   }
 

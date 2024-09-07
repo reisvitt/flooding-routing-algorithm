@@ -13,6 +13,7 @@ public class FloodingController3 implements FloodingAlgorithm {
   public void send(Router from, Router router, Packet packet) {
     if (packet.getTTL() <= 1) {
       System.out.println("Reach TTL on Router: " + router.getIp() + " From Router: " + from.getIp());
+      router.showError(from, packet);
       return;
     }
 

@@ -1,5 +1,6 @@
 package model;
 
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javafx.beans.property.BooleanProperty;
@@ -14,6 +15,7 @@ public class Store {
   private IntegerProperty messageCounter;
   private AtomicInteger runningThreads;
   private IntegerProperty velocity;
+  private AtomicBoolean arrived;
 
   public static Store getInstance() {
     if (instance == null) {
@@ -31,6 +33,7 @@ public class Store {
     this.runningThreads = new AtomicInteger(0);
     this.messageCounterAtomic = new AtomicInteger(0);
     this.messageCounter = new SimpleIntegerProperty(0);
+    this.arrived = new AtomicBoolean(false);
   }
 
   public int increment() {
@@ -75,5 +78,13 @@ public class Store {
 
   public IntegerProperty getVelocity() {
     return this.velocity;
+  }
+
+  public boolean getArrived() {
+    return this.arrived.get();
+  }
+
+  public void setArrived(boolean value) {
+    this.arrived.compareAndSet(false, value);
   }
 }
