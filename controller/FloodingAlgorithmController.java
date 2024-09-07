@@ -48,6 +48,8 @@ public class FloodingAlgorithmController implements Initializable {
   @FXML
   private Button startButton, stopButton;
 
+  Text messageCount;
+
   private ArrayList<Router> routers;
   private FloodingAlgorithm controller;
   private Store store;
@@ -126,7 +128,7 @@ public class FloodingAlgorithmController implements Initializable {
     this.store.getMessageCounterProperty().addListener(new ChangeListener<Number>() {
       @Override
       public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-        System.out.println("TOTAL: " + newValue);
+        messageCount.setText("Mensagens: " + newValue);
       }
     });
 
@@ -173,6 +175,16 @@ public class FloodingAlgorithmController implements Initializable {
 
     this.listAlgorithms.getItems().addAll(option1, option2, option3, option4);
     this.listAlgorithms.setValue(option1);
+  }
+
+  private void startMessageCout() {
+    messageCount = new Text("Mensagens: 0");
+    double width = network.getWidth();
+
+    messageCount.setY(0);
+    messageCount.setX(width - 120);
+
+    this.network.getChildren().add(messageCount);
   }
 
   @Override
@@ -224,6 +236,7 @@ public class FloodingAlgorithmController implements Initializable {
 
     Platform.runLater(() -> {
       this.routerPositions();
+      this.startMessageCout();
     });
 
     this.routers.forEach(router -> {
