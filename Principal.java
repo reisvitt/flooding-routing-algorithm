@@ -1,22 +1,33 @@
+import controller.FloodingAlgorithmController;
 import controller.SplashController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Principal extends Application {
   SplashController splashController = new SplashController();
+  FloodingAlgorithmController floodingController = new FloodingAlgorithmController();
 
   @Override
   public void start(Stage stage) throws Exception {
 
     Parent root = FXMLLoader.load(getClass().getResource("/view/SplashScreen.fxml"));
-    Scene scene = new Scene(root);
+
+    double screenWidth = Screen.getPrimary().getBounds().getWidth();
+    double screenHeight = Screen.getPrimary().getBounds().getHeight();
+
+    double windowWidth = screenWidth * 0.8;
+    double windowHeight = screenHeight * 0.7;
+
+    Scene scene = new Scene(root, windowWidth, windowHeight);
+
     stage.setScene(scene);
     stage.setTitle("Algoritmo de inundação");
-    stage.setResizable(false);
+    stage.setResizable(true);
     stage.setOnCloseRequest(t -> {
       Platform.exit();
       System.exit(0);

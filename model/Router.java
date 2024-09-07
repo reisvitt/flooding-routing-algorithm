@@ -2,12 +2,14 @@ package model;
 
 import java.util.ArrayList;
 
+import javafx.scene.layout.StackPane;
 import service.flooding.FloodingAlgorithm;
 
 public class Router {
   private String ip;
   private ArrayList<Connection> connections;
   private FloodingAlgorithm controller;
+  private StackPane stack;
 
   public Router(String ip) {
     this.ip = ip;
@@ -50,6 +52,14 @@ public class Router {
 
   public void setController(FloodingAlgorithm controller) {
     this.controller = controller;
+  }
+
+  public StackPane getStack() {
+    return stack;
+  }
+
+  public void setStack(StackPane stack) {
+    this.stack = stack;
   }
 
   @Override
