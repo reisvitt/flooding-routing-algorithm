@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -8,7 +9,10 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
@@ -19,6 +23,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 import model.Connection;
 import model.Packet;
 import model.Router;
@@ -188,6 +195,34 @@ public class FloodingAlgorithmController implements Initializable {
     messageCount.setX(width - 160);
 
     this.network.getChildren().add(messageCount);
+  }
+
+  @FXML
+  public void openAbout() {
+    try {
+      Stage aboutStage = new Stage();
+      aboutStage.initModality(Modality.APPLICATION_MODAL);
+      aboutStage.setTitle("Sobre");
+
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/AboutScreen.fxml"));
+      Parent newScreen = fxmlLoader.load();
+
+      double screenHeight = Screen.getPrimary().getBounds().getHeight();
+
+      double windowHeight = screenHeight * 0.95;
+
+      if (windowHeight > 650) {
+        windowHeight = 650;
+      }
+
+      Scene aboutScene = new Scene(newScreen, 740, windowHeight);
+
+      aboutStage.setScene(aboutScene);
+
+      aboutStage.showAndWait();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override

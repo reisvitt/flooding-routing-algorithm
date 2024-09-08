@@ -26,7 +26,7 @@ public class Principal extends Application {
     Scene scene = new Scene(root, windowWidth, windowHeight);
 
     stage.setScene(scene);
-    stage.setTitle("Algoritmo de inundação");
+    stage.setTitle("Algoritmo de Inundação");
     stage.setResizable(true);
     stage.setOnCloseRequest(t -> {
       Platform.exit();

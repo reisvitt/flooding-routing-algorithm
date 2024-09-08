@@ -12,19 +12,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class SplashController implements Initializable {
   @FXML
-  private VBox mainBox;
+  private StackPane main;
 
   public void goToMainScreen() {
     try {
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/FloodingAlgorithmScreen.fxml"));
       Parent newScreen = fxmlLoader.load();
-      Stage stage = (Stage) mainBox.getScene().getWindow();
+      Stage stage = (Stage) main.getScene().getWindow();
       stage.setTitle("Algoritmo de Inundação");
 
       double screenWidth = Screen.getPrimary().getBounds().getWidth();
@@ -41,14 +41,9 @@ public class SplashController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
-    // Agendar a execução do método após 2 segundos
     scheduler.schedule(() -> {
       Platform.runLater(() -> goToMainScreen());
-    }, 2, TimeUnit.SECONDS);
-
-    // Fechar o scheduler quando não for mais necessário
+    }, 1, TimeUnit.SECONDS);
     scheduler.shutdown();
-
   }
 }

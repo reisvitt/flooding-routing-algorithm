@@ -23,6 +23,7 @@ public class FloodingController1 implements FloodingAlgorithm {
           "ROUTER: " + router.getIp() + "CONNECTIONS: " + router.getConnections() + " ENVIANDO PARA: " + to.getIp());
 
       Packet newPacket = packet.duplicate();
+      newPacket.addLineHistory(connection.getLine());
       router.flush(to, newPacket);
     }
   }

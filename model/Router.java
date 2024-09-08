@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import service.flooding.FloodingAlgorithm;
 import utils.ColorUtil;
 
@@ -77,6 +79,9 @@ public class Router {
 
     image.setLayoutY(this.getStack().getLayoutX());
     image.setLayoutY(this.getStack().getLayoutY());
+
+    Tooltip labelTooltip = new Tooltip("Sucesso! De " + packet.getSender() + " para " + packet.getReceiver());
+    Tooltip.install(image, labelTooltip);
 
     Platform.runLater(() -> {
       this.getStack().getChildren().add(image);

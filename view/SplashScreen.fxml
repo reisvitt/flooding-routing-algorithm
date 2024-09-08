@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-border-radius: 50;" styleClass="root" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SplashController">
-   <center>
-      <VBox fx:id="mainBox" alignment="CENTER" style="-fx-border-radius: 50; -fx-background-color: #FFF;" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/logo.jpeg" />
-               </image>
-            </ImageView>
-         </children>
-      </VBox>
-   </center>
-</BorderPane>
+
+<StackPane fx:id="main" styleClass="cover" stylesheets="@styles/splash.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SplashController" />
