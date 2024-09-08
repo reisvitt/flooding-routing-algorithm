@@ -1,0 +1,57 @@
+.root {
+  -fx-background-color: linear-gradient(from 0% 50% to 100% 0%, #cbd1d6, #edefee);
+}
+
+.settings-panel {
+  -fx-background-color: linear-gradient(from 0% 50% to 100% 100%, #319082, #3ed9cc);
+  -fx-border-radius: 0 25 25 0;
+  -fx-background-radius: 0 25 25 0;
+}
+
+.settings-panel .title {
+  -fx-font-weight: bold;
+  -fx-font-size: 18;
+  -fx-fill: #FFF;
+}
+
+.settings-panel .field {
+  -fx-padding: 10;
+}
+
+.settings-panel .field .label {
+  -fx-font-weight: bold;
+  -fx-font-size: 14;
+  -fx-text-fill: #FFF;
+  -fx-text-alignment: center;
+  -fx-alignment: center;
+}
+
+.router {
+  -fx-border-radius: 200; 
+  -fx-background-color: #2f9182; 
+  -fx-background-radius: 200;
+  -fx-max-height: 40;
+  -fx-min-height: 40;
+  -fx-max-width: 40;
+  -fx-min-width: 40;
+  -fx-pref-width: 40;
+  -fx-pref-height: 40;
+}
+
+.router-text {
+  -fx-fill: #FFF;
+  -fx-font-weight: bold;
+}
+
+.router-connection {
+  -fx-stroke: #8fd0d3;
+  -fx-stroke-width: 1;
+  -fx-stroke-line-cap: round;
+}
+
+.message {
+  -fx-fit-height: 20;
+  -fx-fit-width: 20;
+  -fx-border-color: black;
+  -fx-border-width: 2px;
+}
